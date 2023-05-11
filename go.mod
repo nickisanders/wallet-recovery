@@ -1,4 +1,4 @@
-module shamir
+module wallet-recovery
 
 go 1.20
 
