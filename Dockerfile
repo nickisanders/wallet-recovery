@@ -9,7 +9,7 @@ WORKDIR /go/src/wallet-recovery
 
 # Build the application inside the container.
 # If the application consists of multiple files, ensure the recovery file is specified.
-RUN go build -o recovery .
+RUN go build -o .
 
 # Run the binary program produced by `go build`
-CMD ["/go/src/wallet-recovery/recovery"]
+CMD ["/go/src/wallet-recovery/wallet-recovery"]
