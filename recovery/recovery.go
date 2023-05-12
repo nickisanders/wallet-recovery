@@ -1,6 +1,9 @@
 package recovery
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/hashicorp/vault/shamir"
 )
 
@@ -11,7 +14,16 @@ func Split(secret []byte, parts int, threshold int) [][]byte {
 		panic(err)
 	}
 
-	//TODO: save shares
+	// save shares
+	for index, share := range shares {
+		filename := fmt.Sprintf("testFiles/share%d", index)
+		err := saveToFile(share, filename)
+		if err != nil {
+			fmt.Printf("Error saving file: %v\n", err)
+		} else {
+			fmt.Printf("File saved successfully!\n")
+		}
+	}
 
 	return shares
 }
@@ -23,4 +35,19 @@ func Combine(shares [][]byte) []byte {
 	}
 
 	return secret
+}
+
+func saveToFile(data []byte, filename string) error {
+	file, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	_, err = file.Write(data)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

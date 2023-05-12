@@ -28,29 +28,31 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Error: action must be 'split' or 'combine'")
 		os.Exit(1)
 	}
-	if *inputFile == "" {
-		fmt.Fprintln(os.Stderr, "Error: inputFile is required")
-		os.Exit(1)
-	}
-	if *parts <= 0 {
-		fmt.Fprintln(os.Stderr, "Error: parts must be a positive integer")
-		os.Exit(1)
-	}
-	if *threshold <= 0 {
-		fmt.Fprintln(os.Stderr, "Error: threshold must be a positive integer")
-		os.Exit(1)
-	}
-
-	// Read input file
-	secret, err := ioutil.ReadFile(*inputFile)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error: failed to read input file: %v\n", err)
-		os.Exit(1)
+	if *action == "split" {
+		if *inputFile == "" {
+			fmt.Fprintln(os.Stderr, "Error: inputFile is required")
+			os.Exit(1)
+		}
+		if *parts <= 0 {
+			fmt.Fprintln(os.Stderr, "Error: parts must be a positive integer")
+			os.Exit(1)
+		}
+		if *threshold <= 0 {
+			fmt.Fprintln(os.Stderr, "Error: threshold must be a positive integer")
+			os.Exit(1)
+		}
 	}
 
 	// Perform action
 	switch *action {
 	case "split":
+		// Read input file
+		secret, err := ioutil.ReadFile(*inputFile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error: failed to read input file: %v\n", err)
+			os.Exit(1)
+		}
+
 		output := recovery.Split(secret, *parts, *threshold)
 		fmt.Println(output)
 	case "combine":
