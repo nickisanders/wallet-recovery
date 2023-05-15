@@ -21,7 +21,7 @@ func Split(secret []byte, parts int, threshold int) [][]byte {
 		if err != nil {
 			fmt.Printf("Error saving file: %v\n", err)
 		} else {
-			fmt.Printf("File saved successfully!\n")
+			fmt.Printf("File %v saved successfully!\n", filename)
 		}
 	}
 

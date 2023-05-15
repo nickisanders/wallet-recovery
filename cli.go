@@ -53,8 +53,8 @@ func main() {
 			os.Exit(1)
 		}
 
-		output := recovery.Split(secret, *parts, *threshold)
-		fmt.Println(output)
+		recovery.Split(secret, *parts, *threshold)
+		fmt.Println("Secret successfully split")
 	case "combine":
 		var shares [][]byte
 		for _, arg := range flag.Args() {
