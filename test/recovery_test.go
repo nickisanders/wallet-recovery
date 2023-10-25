@@ -6,8 +6,6 @@ import (
 	"wallet-recovery/recovery"
 )
 
-// TestHelloEmpty calls greetings.Hello with an empty string,
-// checking for an error.
 func TestSplitMessage(t *testing.T) {
 	secret := "never gonna give you up never gonna let you down"
 	msg := recovery.Split([]byte(secret), 3, 2)
@@ -17,6 +15,6 @@ func TestSplitMessage(t *testing.T) {
 	shareThree := []byte{41, 215, 227, 112, 63, 110, 86, 18, 127, 92, 64, 142, 197, 7, 90, 232, 15, 186, 155, 222, 55, 55, 167, 205}
 	shares := [][]byte{shareOne, shareTwo, shareThree}
 
-	t.Fatalf(`Split("never gonna give you up never gonna let you down") = %v, want %v, error`, msg, shares)
+	t.Fatalf(`Split(%v) = %v, want %v, error`, secret, msg, shares)
 	t.Fatalf(`Split("never gonna give you up never gonna let you down") = %v, want %v, error`, msg, shares)
 }

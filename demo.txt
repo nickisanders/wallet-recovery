@@ -2,3 +2,7 @@ go run . -action="split" -inputFile="testFiles/secret.txt" -parts=3 -threshold=2
 
 
 go run . -action=combine testFiles/share0 testFiles/share1
+
+go run . -action=combine testFiles/share0 testFiles/share2
+
+go run . -action=combine testFiles/share0
